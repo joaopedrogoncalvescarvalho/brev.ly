@@ -1,0 +1,59 @@
+# Dependências
+node_modules
+npm-debug.log*
+.npm
+
+# Environment
+.env*
+
+# Git
+.git
+.gitignore
+
+# Build/dist
+dist
+build
+*.tsbuildinfo
+
+# Documentação
+*.md
+docs/
+
+# Coverage e testes
+.coverage
+.nyc_output
+coverage
+**/*.test.*
+**/*.spec.*
+test/
+tests/
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Cache
+.cache
+.parcel-cache
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Outros
+.eslintrc*
+.prettierrc*
+jest.config.*
+*.config.js
+tsconfig.json
