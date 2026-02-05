@@ -101,13 +101,15 @@ export async function linksRoutes(fastify: FastifyInstance) {
     return reply.send(link);
   });
 
-  fastify.delete("/links/:shortUrl", async (request, reply) => {
-    const { shortUrl } = request.params as { shortUrl: string };
+  fastify.delete("/links/:id", async (request, reply) => {
+    const { id } = request.params as { id: string };
 
     const [deletedLink] = await db
       .delete(links)
-      .where(eq(links.shortUrl, shortUrl))
+      .where(eq(links.id, id))
       .returning();
+
+    console.log(deletedLink);
 
     if (!deletedLink) {
       return reply.status(404).send({
@@ -127,6 +129,26 @@ export async function linksRoutes(fastify: FastifyInstance) {
         accessCount: sql`${links.accessCount} + 1`,
       })
       .where(eq(links.shortUrl, shortUrl))
+      .returning();
+
+    if (!updatedLink) {
+      return reply.status(404).send({
+        error: "Link not found",
+      });
+    }
+
+    return reply.send(updatedLink);
+  });
+
+  fastify.patch("/links/:id/metrics", async (request, reply) => {
+    const { id } = request.params as { id: string };
+
+    const [updatedLink] = await db
+      .update(links)
+      .set({
+        accessCount: sql`${links.accessCount} + 1`,
+      })
+      .where(eq(links.id, id))
       .returning();
 
     if (!updatedLink) {
