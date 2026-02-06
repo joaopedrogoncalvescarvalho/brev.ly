@@ -53,7 +53,7 @@ export function LinkList({ showEmptyState = true }: LinkListProps) {
             onClick={handleExportCSV}
             isLoading={exportCSV.isPending}
             disabled={true}
-            className="text-gray-400 border-gray-200 cursor-not-allowed"
+            className="text-gray-500 border-gray-300 bg-gray-50 cursor-not-allowed"
           >
             <Download className="h-4 w-4 mr-1" />
             Baixar CSV
@@ -78,7 +78,7 @@ export function LinkList({ showEmptyState = true }: LinkListProps) {
           size="sm"
           onClick={handleExportCSV}
           isLoading={exportCSV.isPending}
-          className="text-gray-600 border-gray-300"
+          className="text-gray-500 border-gray-300 bg-gray-50 hover:bg-gray-100"
         >
           <Download className="h-4 w-4 mr-1" />
           Baixar CSV

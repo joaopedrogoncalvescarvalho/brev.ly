@@ -3,7 +3,8 @@ import { Copy, Trash2 } from "lucide-react";
 import { useDeleteLink } from "../../hooks/useLinks";
 import { useToast } from "../../hooks/useToast";
 import { Link } from "../../types/link";
-import { formatDate, copyToClipboard, getShortUrl } from "../../utils/helpers";
+import { copyToClipboard, getShortUrl } from "../../utils/helpers";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface LinkItemProps {
   link: Link;
@@ -15,6 +16,14 @@ export function LinkItem({ link, isLast }: LinkItemProps) {
   const deleteLink = useDeleteLink();
   const { success, error } = useToast();
   const shortUrl = getShortUrl(link.shortUrl);
+  const queryClient = useQueryClient();
+
+  const handleLinkClick = () => {
+    // Recarrega a lista após um pequeno delay para capturar a contagem atualizada
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ["links"] });
+    }, 1000);
+  };
 
   const handleCopy = async () => {
     try {
@@ -24,8 +33,8 @@ export function LinkItem({ link, isLast }: LinkItemProps) {
         duration: 2000,
       });
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      console.error("Failed to copy:", error);
+    } catch (err) {
+      console.error("Failed to copy:", err);
       error("Falha ao copiar o link");
     }
   };
@@ -46,9 +55,15 @@ export function LinkItem({ link, isLast }: LinkItemProps) {
       className={`p-4 flex justify-between items-center ${!isLast ? "border-b border-gray-100" : ""}`}
     >
       <div className="flex-1">
-        <h3 className="text-blue-600 font-medium text-sm mb-1">
+        <a
+          href={`http://localhost:3333/${link.shortUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleLinkClick}
+          className="text-blue-600 font-medium text-sm mb-1 hover:text-blue-800 cursor-pointer block"
+        >
           brev.ly/{link.shortUrl}
-        </h3>
+        </a>
         <p className="text-gray-600 text-sm">{link.originalUrl}</p>
       </div>
 
