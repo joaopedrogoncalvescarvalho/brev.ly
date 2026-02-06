@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { Download, Link } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Loading } from "../ui/Loading";
 import { LinkItem } from "./LinkItem";
@@ -52,14 +52,18 @@ export function LinkList({ showEmptyState = true }: LinkListProps) {
             size="sm"
             onClick={handleExportCSV}
             isLoading={exportCSV.isPending}
-            className="text-gray-600 border-gray-300"
+            disabled={true}
+            className="text-gray-400 border-gray-200 cursor-not-allowed"
           >
             <Download className="h-4 w-4 mr-1" />
             Baixar CSV
           </Button>
         </div>
-        <div className="text-center py-8">
-          <p className="text-gray-500">Nenhum link encontrado</p>
+        <div className="text-center py-12">
+          <Link className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+          <p className="text-gray-500 text-sm font-medium uppercase tracking-wide">
+            AINDA NÃO EXISTEM LINKS CADASTRADOS
+          </p>
         </div>
       </div>
     );
@@ -67,7 +71,7 @@ export function LinkList({ showEmptyState = true }: LinkListProps) {
 
   return (
     <div className="bg-white rounded-lg p-6">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
         <h2 className="text-xl font-bold text-gray-600">Meus links</h2>
         <Button
           variant="outline"
