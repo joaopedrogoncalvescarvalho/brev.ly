@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { db } from "../db/connection";
 import { links } from "../db/schema";
-import { eq, sql } from "drizzle-orm";
+import { eq, sql, desc } from "drizzle-orm";
 import {
   isValidUrl,
   normalizeUrl,
@@ -79,7 +79,10 @@ export async function linksRoutes(fastify: FastifyInstance) {
   });
 
   fastify.get("/links", async (request, reply) => {
-    const allLinks = await db.select().from(links);
+    const allLinks = await db
+      .select()
+      .from(links)
+      .orderBy(desc(links.createdAt));
     return reply.send(allLinks);
   });
 

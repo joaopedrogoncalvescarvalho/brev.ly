@@ -19,7 +19,6 @@ export function LinkItem({ link, isLast }: LinkItemProps) {
   const queryClient = useQueryClient();
 
   const handleLinkClick = () => {
-    // Recarrega a lista após um pequeno delay para capturar a contagem atualizada
     setTimeout(() => {
       queryClient.invalidateQueries({ queryKey: ["links"] });
     }, 1000);
