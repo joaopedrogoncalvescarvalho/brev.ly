@@ -37,7 +37,10 @@ function AppContent() {
           {/* Página de redirecionamento */}
           <Route path="/:shortUrl" element={<RedirectPage />} />
 
-          {/* Página 404 */}
+          {/* Página 404 específica */}
+          <Route path="/404" element={<NotFoundPage />} />
+
+          {/* Página 404 catch-all */}
           <Route
             path="*"
             element={

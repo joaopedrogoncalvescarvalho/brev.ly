@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ExternalLink, Zap } from "lucide-react";
 import { Loading } from "../components/ui/Loading";
+import { NotFoundPage } from "../pages/NotFoundPage";
 import { useLinkByShortUrl } from "../hooks/useLinks";
 import { linkService } from "../services/api";
 
@@ -25,7 +26,7 @@ export function RedirectPage() {
   }, [link, shortUrl]);
 
   if (!shortUrl) {
-    return <Navigate to="/404" replace />;
+    return <NotFoundPage />;
   }
 
   if (isLoading) {
@@ -63,7 +64,7 @@ export function RedirectPage() {
   }
 
   if (error) {
-    return <Navigate to="/404" replace />;
+    return <NotFoundPage />;
   }
 
   return (
