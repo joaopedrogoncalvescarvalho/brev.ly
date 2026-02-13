@@ -5,9 +5,10 @@ import {
   CreateLinkResponse,
   ExportCSVResponse,
 } from "../types/link";
+import { env } from "../env";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:3333",
+  baseURL: env.VITE_BACKEND_URL,
 });
 
 export const linkService = {

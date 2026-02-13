@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { env } from "../env";
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
@@ -25,9 +26,7 @@ export function copyToClipboard(text: string): Promise<void> {
 }
 
 export function getShortUrl(shortUrl: string): string {
-  const frontendUrl =
-    import.meta.env.VITE_FRONTEND_URL || "http://localhost:3000";
-  return `${frontendUrl}/${shortUrl}`;
+  return `${env.VITE_FRONTEND_URL}/${shortUrl}`;
 }
 
 export function downloadFile(url: string, filename: string = "download"): void {
