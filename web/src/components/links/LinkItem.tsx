@@ -56,7 +56,7 @@ export function LinkItem({ link, isLast }: LinkItemProps) {
     >
       <div className="flex-1">
         <a
-          href={`http://localhost:3333/${link.shortUrl}`}
+          href={`http://localhost:3000/${link.shortUrl}`}
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleLinkClick}
