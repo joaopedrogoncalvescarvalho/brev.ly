@@ -42,7 +42,6 @@ export function useToast() {
     setToasts([]);
   }, []);
 
-  // Helper methods
   const success = useCallback(
     (message: string, options: Omit<ToastOptions, "type"> = {}) => {
       return showToast(message, { ...options, type: "success" });

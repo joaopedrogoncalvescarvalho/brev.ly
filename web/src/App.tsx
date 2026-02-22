@@ -7,7 +7,6 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { Toast, ToastContainer } from "./components/ui/Toast";
 import { useToast } from "./hooks/useToast";
 
-// Configuração do React Query
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,7 +23,6 @@ function AppContent() {
     <>
       <Router>
         <Routes>
-          {/* Página principal */}
           <Route
             path="/"
             element={
@@ -34,13 +32,10 @@ function AppContent() {
             }
           />
 
-          {/* Página de redirecionamento */}
           <Route path="/:shortUrl" element={<RedirectPage />} />
 
-          {/* Página 404 específica */}
           <Route path="/404" element={<NotFoundPage />} />
 
-          {/* Página 404 catch-all */}
           <Route
             path="*"
             element={
@@ -52,7 +47,6 @@ function AppContent() {
         </Routes>
       </Router>
 
-      {/* Sistema de toasts */}
       <ToastContainer>
         {toasts.map((toast) => (
           <Toast key={toast.id} {...toast} />

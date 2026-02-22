@@ -112,8 +112,6 @@ export async function linksRoutes(fastify: FastifyInstance) {
       .where(eq(links.id, id))
       .returning();
 
-    console.log(deletedLink);
-
     if (!deletedLink) {
       return reply.status(404).send({
         error: "Link not found",

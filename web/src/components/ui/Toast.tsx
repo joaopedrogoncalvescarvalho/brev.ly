@@ -77,7 +77,6 @@ export function Toast({
   );
 }
 
-// Container para os toasts
 export function ToastContainer({ children }: { children: ReactNode }) {
   return (
     <div className="fixed top-0 right-0 z-50 flex flex-col gap-2 p-4 pointer-events-none">
