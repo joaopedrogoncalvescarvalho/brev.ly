@@ -11,7 +11,7 @@ import {
 } from "../utils/url-validation";
 
 const createLinkSchema = z.object({
-  originalUrl: z.string().min(1, "URL is required"),
+  originalUrl: z.string().min(1, "URL é obrigatória"),
   shortUrl: z.string().optional(),
 });
 
@@ -22,7 +22,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
     const normalizedUrl = normalizeUrl(body.originalUrl);
     if (!isValidUrl(normalizedUrl)) {
       return reply.status(400).send({
-        error: "Invalid original URL",
+        error: "URL original inválida",
       });
     }
 
@@ -31,7 +31,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
       if (!isValidShortCode(shortUrl)) {
         return reply.status(400).send({
           error:
-            "Invalid short URL format. Use only letters, numbers, _ and - (3-10 characters)",
+            "Formato de URL encurtada inválido. Use apenas letras, números, _ e - (3-10 caracteres)",
         });
       }
 
@@ -43,7 +43,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
       if (existingLink.length > 0) {
         return reply.status(409).send({
-          error: "Short URL already exists",
+          error: "URL encurtada já existe",
         });
       }
     } else {
@@ -62,7 +62,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
       if (attempts >= 10) {
         return reply.status(500).send({
-          error: "Unable to generate a unique short URL",
+          error: "Não foi possível gerar uma URL encurtada única",
         });
       }
     }
@@ -114,7 +114,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
     if (!deletedLink) {
       return reply.status(404).send({
-        error: "Link not found",
+        error: "Link não encontrado",
       });
     }
 
@@ -134,7 +134,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
     if (!updatedLink) {
       return reply.status(404).send({
-        error: "Link not found",
+        error: "Link não encontrado",
       });
     }
 
@@ -154,7 +154,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
     if (!updatedLink) {
       return reply.status(404).send({
-        error: "Link not found",
+        error: "Link não encontrado",
       });
     }
 
@@ -172,7 +172,7 @@ export async function linksRoutes(fastify: FastifyInstance) {
 
     if (!link) {
       return reply.status(404).send({
-        error: "Link not found",
+        error: "Link não encontrado",
       });
     }
 

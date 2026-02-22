@@ -8,7 +8,8 @@ export async function exportRoutes(fastify: FastifyInstance) {
     try {
       const allLinks = await db.select().from(links);
 
-      const csvHeader = "ID;Original URL;Short URL;Access Count;Created Date\n";
+      const csvHeader =
+        "ID;URL Original;URL Encurtada;Contagem de Acessos;Data de Criação\n";
       const csvContent = allLinks
         .map((link) => {
           const createdAt = link.createdAt.toISOString().split("T")[0];
@@ -21,14 +22,13 @@ export async function exportRoutes(fastify: FastifyInstance) {
       const fileUrl = await storageProvider.upload(csvData, "text/csv", "csv");
 
       return reply.send({
-        message: "CSV generated successfully",
+        message: "CSV gerado com sucesso",
         downloadUrl: fileUrl,
         totalRecords: allLinks.length,
       });
     } catch (error) {
-      console.error("Error generating CSV:", error);
       return reply.status(500).send({
-        error: "Internal server error while generating CSV",
+        error: "Erro interno do servidor ao gerar CSV",
       });
     }
   });
